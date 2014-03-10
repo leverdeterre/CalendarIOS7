@@ -1,4 +1,3 @@
-
 Pod::Spec.new do |s|
 
   s.name         = "CalendarIOS7"
@@ -68,7 +67,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  # s.resources = "CalendarIOS7/CalendarIOS7/CalendarIOS7/*.xib"
+  s.resources = "CalendarIOS7/CalendarIOS7/CalendarIOS7/*.xib"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
