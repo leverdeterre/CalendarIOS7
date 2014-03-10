@@ -1,9 +1,9 @@
 //
 //  NSDateFormatter+CAT.m
-//  catech
+//  CalendarIOS7
 //
-//  Created by Mickael Laloum on 20/01/2014.
-//
+//  Created by Jerome Morissard on 3/3/14.
+//  Copyright (c) 2014 Jerome Morissard. All rights reserved.
 //
 
 #import "NSDateFormatter+CAT.h"
