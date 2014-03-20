@@ -11,8 +11,9 @@
 
 #import "NSDate+Agenda.h"
 #import "NSDate+ETI.h"
+#import "CALAgenda.h"
 
-@interface CALViewController () <UICollectionViewDelegate>
+@interface CALViewController () <UICollectionViewDelegate, CALAgendaCollectionViewDelegate>
 @property (nonatomic, strong) CALAgendaViewController *agendaVc;
 @end
 
@@ -34,7 +35,7 @@
 - (IBAction)showMyCalendar:(id)sender
 {
     self.agendaVc = [CALAgendaViewController new];
-    self.agendaVc.delegate = self;
+    self.agendaVc.agendaDelegate = self;
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
     components.month = -1;
@@ -50,7 +51,7 @@
 - (IBAction)showMyCalendarStyleCustom:(id)sender
 {
     self.agendaVc = [CALAgendaViewController new];
-    self.agendaVc.delegate = self;
+    self.agendaVc.agendaDelegate = self;
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
     components.month = -1;
@@ -61,6 +62,14 @@
     [self.agendaVc setToDate:toDate];
     self.agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleCustom1;
     [self.navigationController pushViewController:self.agendaVc animated:YES];
+}
+
+
+#pragma mark - CALAgendaCollectionViewDelegate
+
+- (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath selectedDate:(NSDate *)selectedDate
+{
+    NSLog(@"%s", __FUNCTION__);
 }
 
 @end

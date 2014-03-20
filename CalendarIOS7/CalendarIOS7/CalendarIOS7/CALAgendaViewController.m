@@ -25,7 +25,6 @@
 #import "CALAgendaDayCollectionViewLayout.h"
 
 @interface CALAgendaViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
-@property (strong, nonatomic) IBOutlet CALAgendaCollectionView *calendarCollectionView;
 
 //model
 @property (strong, nonatomic) NSArray *rdvs;
@@ -220,22 +219,16 @@
 {
     NSLog(@"%s",__FUNCTION__);
     self.selectedDate = [self dateAtIndexPath:indexPath];
+    [self.agendaDelegate agendaCollectionView:self.calendarCollectionView didSelectItemAtIndexPath:indexPath selectedDate:self.selectedDate];
     
     if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
-        CALAgendaDayCollectionViewLayout *collectionViewLayout = [CALAgendaDayCollectionViewLayout new];
-        
-        __weak CALAgendaViewController* blockSelf = self;
-        [self.calendarCollectionView setCollectionViewLayout:collectionViewLayout animated:YES completion:^(BOOL finished) {
-            [blockSelf.calendarCollectionView reloadData];
-            [blockSelf setDayModeForItemAtIntexPath:indexPath];
-            [blockSelf.calendarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
-        }];
+        [self setDayModeForSelectedIndexPath:indexPath];
     }
 }
 
 #pragma mark - UIBArButtonItem
 
-- (void)setDayModeForItemAtIntexPath:(NSIndexPath *)indexPath
+- (void)setDayLeftBarButtonItemWithMonthAtIntexPath:(NSIndexPath *)indexPath
 {
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:[self monthAtIndexPath:indexPath] style:UIBarButtonItemStyleBordered target:self action:@selector(setMonthMode)];
     [[self navigationItem] setLeftBarButtonItem:button animated:YES];
@@ -254,6 +247,18 @@
             blockSelf.selectedDate = nil;
         }];
     }
+}
+
+- (void)setDayModeForSelectedIndexPath:(NSIndexPath *)indexPath
+{
+    CALAgendaDayCollectionViewLayout *collectionViewLayout = [CALAgendaDayCollectionViewLayout new];
+    __weak CALAgendaViewController* blockSelf = self;
+    
+    [self.calendarCollectionView setCollectionViewLayout:collectionViewLayout animated:YES completion:^(BOOL finished) {
+        [blockSelf.calendarCollectionView reloadData];
+        [blockSelf setDayLeftBarButtonItemWithMonthAtIntexPath:indexPath];
+        [blockSelf.calendarCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    }];
 }
 
 

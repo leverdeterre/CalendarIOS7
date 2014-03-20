@@ -93,6 +93,8 @@
 		C29644A818CCF14B00D45987 /* CALDayHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALDayHeaderView.h; sourceTree = "<group>"; };
 		C29644A918CCF14B00D45987 /* CALDayHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALDayHeaderView.m; sourceTree = "<group>"; };
 		C29644AB18CCF15A00D45987 /* CALDayHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CALDayHeaderView.xib; sourceTree = "<group>"; };
+		C29D1AD118DB8C8F0011C2E7 /* CALAgendaCollectionViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALAgendaCollectionViewDelegate.h; sourceTree = "<group>"; };
+		C29D1AD218DB8F8F0011C2E7 /* CALAgenda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALAgenda.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +198,9 @@
 		C296448118CC4F7B00D45987 /* CalendarIOS7 */ = {
 			isa = PBXGroup;
 			children = (
+				C29D1AD218DB8F8F0011C2E7 /* CALAgenda.h */,
 				C296448218CC4F7B00D45987 /* CALAgendaEvent.h */,
+				C29D1AD118DB8C8F0011C2E7 /* CALAgendaCollectionViewDelegate.h */,
 				C296448318CC4F7B00D45987 /* CALAgendaMonthCollectionViewLayout.h */,
 				C296448418CC4F7B00D45987 /* CALAgendaMonthCollectionViewLayout.m */,
 				C29644A018CC6E1F00D45987 /* CALAgendaDayCollectionViewLayout.h */,
@@ -548,6 +552,7 @@
 				C296447D18CC4EE000D45987 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C296447E18CC4EE000D45987 /* Build configuration list for PBXNativeTarget "CalendarIOS7Tests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +561,7 @@
 				C296448018CC4EE000D45987 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
