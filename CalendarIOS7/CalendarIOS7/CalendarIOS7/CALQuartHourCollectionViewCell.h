@@ -7,16 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_OPTIONS(NSInteger,  CALQuartHourViewRdvState) {
-    CALQuartHourViewRdvStateNone = 1 << 0,
-    CALQuartHourViewRdvStateDebut = 1 << 1,
-    CALQuartHourViewRdvStateEntre = 1 << 2,
-    CALQuartHourViewRdvStateFin = 1 << 3,
-    CALQuartHourViewRdvStateAlreadyReserved = 1 << 4,
-    CALQuartHourViewRdvStateDebutEtFin = (CALQuartHourViewRdvStateDebut | CALQuartHourViewRdvStateFin)
-};
-
+#import "CALQuartHour.h"
 
 @interface CALQuartHourCollectionViewCell : UICollectionViewCell
 

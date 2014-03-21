@@ -72,4 +72,9 @@
     NSLog(@"%s", __FUNCTION__);
 }
 
+- (BOOL)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView canSelectDate:(NSDate *)selectedDate
+{
+    return YES;
+}
+
 @end

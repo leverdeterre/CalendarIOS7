@@ -12,6 +12,8 @@
 #import "NSDate+ETI.h"
 #import "NSDateFormatter+CAT.h"
 #import "NSDate+Agenda.h"
+#import "CALDay.h"
+#import "CALQuartHour.h"
 
 //UI
 #import "CALMonthHeaderView.h"
@@ -37,6 +39,9 @@
 @property (strong, nonatomic) NSDate *fromFirstDayMonth;
 @property (strong, nonatomic) NSDate *selectedDate;
 
+//Quarts selection
+@property (strong, nonatomic) CALDay *dayStructured;
+
 @end
 
 @implementation CALAgendaViewController
@@ -56,6 +61,7 @@
     self.calendarCollectionView.delegate = self;
     [self.view addSubview:self.calendarCollectionView];
     self.calendarCollectionView.dataSource = self;
+    self.dayStructured = [CALDay new];
 }
 
 - (void)setFromDate:(NSDate *)fromDate
@@ -141,7 +147,8 @@
             hour = (indexPath.row/4);
         }
         
-        [cell updateWithDayStartDate:nil quartState:CALQuartHourViewRdvStateNone hour:hour patientName:@""];
+        CALQuartHour *qh = self.dayStructured.quarts[indexPath.row];
+        [cell updateWithDayStartDate:nil quartState:qh.state hour:hour patientName:@""];
         return cell;
     }
     
@@ -224,6 +231,15 @@
     if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
         [self setDayModeForSelectedIndexPath:indexPath];
     }
+    else {
+        BOOL canSelect = YES;
+        if ([self.agendaDelegate respondsToSelector:@selector(agendaCollectionView:canSelectDate:)]) {
+            canSelect = [self.agendaDelegate agendaCollectionView:self.calendarCollectionView canSelectDate:[self.selectedDate dateByAddingTimeInterval:indexPath.row*15*60]];
+        }
+        if (canSelect == YES) {
+            [self collectionView:self.calendarCollectionView didSelecQuartAtIndexPath:indexPath];
+        }
+    }
 }
 
 #pragma mark - UIBArButtonItem
@@ -261,5 +277,83 @@
     }];
 }
 
+#pragma mark - Quarts selction
+
+- (void)collectionView:(UICollectionView *)collectionView didSelecQuartAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.dayStructured numberOfSelectedQuarts] == 0) {
+        [self.dayStructured selectQuartsFrom:indexPath.row to:indexPath.row];
+        //[self.calendarCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+        [self.calendarCollectionView reloadData];
+    }
+    else if ([self.dayStructured numberOfSelectedQuarts] == 1) {
+        //select from 1 to 2
+        NSInteger last = indexPath.row;
+        NSInteger first = [self.dayStructured firstSelectedQuart];
+        
+        if (first == last) {
+            CALQuartHour *quart = self.dayStructured.quarts[indexPath.row];
+            quart.state = CALQuartHourViewRdvStateNone;
+            //[self.calendarCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+            [self.calendarCollectionView reloadData];
+        }
+        
+        if (last < first) {
+            NSInteger temp = first;
+            first = last;
+            last = temp;
+        }
+        
+        [self.dayStructured selectQuartsFrom:first to:last];
+        //[self.calendarCollectionView reloadItemsAtIndexPaths:[self indexPathsFrom:first to:last]];
+        [self.calendarCollectionView reloadData];
+
+    }
+    else {
+        //select from 1 to 2
+        NSInteger newSelectedIndex = indexPath.row;
+        NSInteger previousFirst = [self.dayStructured firstSelectedQuart];
+        NSInteger previousLast = [self.dayStructured lastSelectedQuart];
+        
+        NSInteger newFirst = previousFirst;
+        NSInteger newLast = previousLast;
+        if (newSelectedIndex < previousFirst) {
+            newFirst = newSelectedIndex;
+        }
+        else if (newSelectedIndex > newLast) {
+            newLast = newSelectedIndex;
+        }
+        else if ((newSelectedIndex - previousFirst) < (previousLast - newSelectedIndex)) {
+            if (previousFirst == newSelectedIndex) {
+                newFirst++;
+            }
+            else {
+                newFirst = newSelectedIndex;
+            }
+        }
+        else if ((newSelectedIndex - previousFirst) > (previousLast - newSelectedIndex)) {
+            if (previousLast == newSelectedIndex ) {
+                newLast--;
+            }
+            else {
+                newLast = newSelectedIndex;
+            }
+        }
+        
+        [self.dayStructured selectQuartsFrom:newFirst to:newLast];
+        //[self.calendarCollectionView reloadItemsAtIndexPaths:[self indexPathsFrom:newFirst to:newLast]];
+        [self.calendarCollectionView reloadData];
+
+    }
+}
+
+- (NSArray *)indexPathsFrom:(NSInteger)from to:(NSInteger)to
+{
+    NSMutableArray *indexPaths = [NSMutableArray new];
+    for (int i = from; i <= to; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    return indexPaths;
+}
 
 @end

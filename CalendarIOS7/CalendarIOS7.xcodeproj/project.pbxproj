@@ -35,6 +35,8 @@
 		C29644A718CC713800D45987 /* CALQuartHourCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29644A618CC713800D45987 /* CALQuartHourCollectionViewCell.xib */; };
 		C29644AA18CCF14B00D45987 /* CALDayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29644A918CCF14B00D45987 /* CALDayHeaderView.m */; };
 		C29644AC18CCF15A00D45987 /* CALDayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29644AB18CCF15A00D45987 /* CALDayHeaderView.xib */; };
+		C29D1AD518DC15760011C2E7 /* CALDay.m in Sources */ = {isa = PBXBuildFile; fileRef = C29D1AD418DC15760011C2E7 /* CALDay.m */; };
+		C29D1AD818DC159A0011C2E7 /* CALQuartHour.m in Sources */ = {isa = PBXBuildFile; fileRef = C29D1AD718DC159A0011C2E7 /* CALQuartHour.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,10 @@
 		C29644AB18CCF15A00D45987 /* CALDayHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CALDayHeaderView.xib; sourceTree = "<group>"; };
 		C29D1AD118DB8C8F0011C2E7 /* CALAgendaCollectionViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALAgendaCollectionViewDelegate.h; sourceTree = "<group>"; };
 		C29D1AD218DB8F8F0011C2E7 /* CALAgenda.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CALAgenda.h; sourceTree = "<group>"; };
+		C29D1AD318DC15760011C2E7 /* CALDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALDay.h; sourceTree = "<group>"; };
+		C29D1AD418DC15760011C2E7 /* CALDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALDay.m; sourceTree = "<group>"; };
+		C29D1AD618DC159A0011C2E7 /* CALQuartHour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CALQuartHour.h; sourceTree = "<group>"; };
+		C29D1AD718DC159A0011C2E7 /* CALQuartHour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CALQuartHour.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +226,10 @@
 				C29644AB18CCF15A00D45987 /* CALDayHeaderView.xib */,
 				C296448A18CC4F7B00D45987 /* CALAgendaViewController.h */,
 				C296448B18CC4F7B00D45987 /* CALAgendaViewController.m */,
+				C29D1AD318DC15760011C2E7 /* CALDay.h */,
+				C29D1AD418DC15760011C2E7 /* CALDay.m */,
+				C29D1AD618DC159A0011C2E7 /* CALQuartHour.h */,
+				C29D1AD718DC159A0011C2E7 /* CALQuartHour.m */,
 				C296449A18CC54EC00D45987 /* NSDate+ETI.h */,
 				C296449B18CC54EC00D45987 /* NSDate+ETI.m */,
 				C296448D18CC4F7B00D45987 /* NSDate+Agenda.h */,
@@ -336,6 +346,7 @@
 				C29644AA18CCF14B00D45987 /* CALDayHeaderView.m in Sources */,
 				C296449818CC50C200D45987 /* CALAgendaCollectionView.m in Sources */,
 				C296449018CC4F7B00D45987 /* CALDayCollectionViewCell.m in Sources */,
+				C29D1AD818DC159A0011C2E7 /* CALQuartHour.m in Sources */,
 				C296445918CC4EDF00D45987 /* main.m in Sources */,
 				C29644A518CC6FEA00D45987 /* CALQuartHourCollectionViewCell.m in Sources */,
 				C29644A218CC6E1F00D45987 /* CALAgendaDayCollectionViewLayout.m in Sources */,
@@ -343,6 +354,7 @@
 				C296449C18CC54EC00D45987 /* NSDate+ETI.m in Sources */,
 				C296449F18CC567100D45987 /* NSDateFormatter+CAT.m in Sources */,
 				C296449518CC4F7B00D45987 /* NSDate+Agenda.m in Sources */,
+				C29D1AD518DC15760011C2E7 /* CALDay.m in Sources */,
 				C296445D18CC4EDF00D45987 /* CALAppDelegate.m in Sources */,
 				C296449318CC4F7B00D45987 /* CALAgendaViewController.m in Sources */,
 				C296446318CC4EDF00D45987 /* CALViewController.m in Sources */,
