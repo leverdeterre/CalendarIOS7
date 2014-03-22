@@ -80,6 +80,14 @@
 - (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath startDate:(NSDate *)startDate endDate:(NSDate *)endDate
 {
     NSLog(@"%s %@ -> %@", __FUNCTION__,startDate, endDate);
+    if (nil != startDate && nil != endDate) {
+        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Continuer" style:UIBarButtonItemStyleBordered target:self action:nil];
+        [[self.agendaVc navigationItem] setRightBarButtonItem:button animated:YES];
+    }
+    else {
+        [[self.agendaVc navigationItem] setRightBarButtonItem:nil animated:YES];
+    }
 }
+
 
 @end

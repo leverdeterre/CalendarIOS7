@@ -7,8 +7,11 @@
 //
 
 #import "CALAgendaCollectionView.h"
+
 #import "CALDayCollectionViewCell.h"
 #import "CALQuartHourCollectionViewCell.h"
+#import "CALDayHeaderView.h"
+#import "CALMonthHeaderView.h"
 
 @implementation CALAgendaCollectionView
 
@@ -47,10 +50,11 @@
     self.backgroundColor = [UIColor whiteColor];
     self.showsVerticalScrollIndicator = NO;
     self.showsHorizontalScrollIndicator = NO;
-    [self registerClass:[CALDayCollectionViewCell class] forCellWithReuseIdentifier:@"CALDayCollectionViewCell"];
-    [self registerNib:[UINib nibWithNibName:@"CALMonthHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALMonthHeaderView"];
-    [self registerNib:[UINib nibWithNibName:@"CALQuartHourCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"CALQuartHourCollectionViewCell"];
-    [self registerNib:[UINib nibWithNibName:@"CALDayHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALDayHeaderView"];
+    [self registerClass:[CALDayCollectionViewCell class] forCellWithReuseIdentifier:@"CALDayCollectionViewCell"];    
+    [self registerClass:[CALQuartHourCollectionViewCell class] forCellWithReuseIdentifier:@"CALQuartHourCollectionViewCell"];
+
+    [self registerClass:[CALDayHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALDayHeaderView"];
+    [self registerClass:[CALMonthHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALMonthHeaderView"];
     
 }
 

@@ -10,6 +10,8 @@
 
 @interface CALMonthHeaderView : UICollectionReusableView
 
-@property (nonatomic, weak) IBOutlet UILabel *monthLabel;
+@property (weak, nonatomic) UILabel *masterLabel;
+
+- (void)updateWithDayNames:(NSArray *)dayNames;
 
 @end

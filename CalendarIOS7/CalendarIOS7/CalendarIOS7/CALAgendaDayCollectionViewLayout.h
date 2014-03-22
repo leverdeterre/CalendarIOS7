@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Jerome Morissard. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CALCollectionViewFlowLayoutWithStickyHeader.h"
 
-@interface CALAgendaDayCollectionViewLayout : UICollectionViewFlowLayout
+@interface CALAgendaDayCollectionViewLayout : CALCollectionViewFlowLayoutWithStickyHeader
 
 @end

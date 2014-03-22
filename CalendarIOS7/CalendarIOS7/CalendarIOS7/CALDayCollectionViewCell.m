@@ -32,7 +32,8 @@
         
         _dayLabel = [[UILabel alloc] initWithFrame:self.bounds];
 		_dayLabel.textAlignment = NSTextAlignmentCenter;
-		_dayLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+        [_dayLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f]];
+
         _dayLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_dayLabel];
 
@@ -97,7 +98,8 @@
     self.backgroundColor = [UIColor clearColor];
     [self removeTodayLayer];
     [self setUserInteractionEnabled:YES];
-    
+    self.dayLabel.textColor = [UIColor blackColor];
+
     switch (type) {
         case CALDayCollectionViewCellDayTypeEmpty:
             self.dayLabel.text = @"";
@@ -109,13 +111,13 @@
             
         case CALDayCollectionViewCellDayTypeToday:
             self.dayLabel.text = @"";
+            self.dayLabel.textColor = [UIColor whiteColor];
             self.todayLayer = [[CALayer alloc] init];
             [self.todayLayer setFrame:CGRectMake(6.0f, 6.0f, 32.0f, 32.0f)];
             [self.todayLayer setBackgroundColor:[UIColor redColor].CGColor];
             [self.todayLayer setCornerRadius:16.0f];
             [self.contentView.layer addSublayer:self.todayLayer];
             [self.contentView setBackgroundColor:self.contentViewColor];
-            [self.contentView.layer setCornerRadius:CGRectGetHeight(self.contentView.frame)/2.0f];
             [self.separatorLayer setBackgroundColor:[UIColor lightGrayColor].CGColor];
             break;
      

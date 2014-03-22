@@ -10,16 +10,61 @@
 #import "NSDateFormatter+CAT.h"
 
 @interface CALQuartHourCollectionViewCell ()
-@property (weak, nonatomic) IBOutlet UIView *selectionView;
-@property (weak, nonatomic) IBOutlet UILabel *quartLabel;
-@property (weak, nonatomic) IBOutlet UIView *hourView;
-@property (weak, nonatomic) IBOutlet UILabel *hourLabel;
+
+@property (weak, nonatomic) UIView *selectionView;
+@property (weak, nonatomic) UILabel *quartLabel;
+@property (weak, nonatomic) UIView *hourView;
+@property (weak, nonatomic) UILabel *hourLabel;
 
 @property (assign,nonatomic) CALQuartHourViewRdvState eventTimeState;
 @property (strong, nonatomic) NSDate *dateDebut;
 @end
 
 @implementation CALQuartHourCollectionViewCell
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup
+{
+    UIView *selectionView = [[UIView alloc] initWithFrame:CGRectMake(31.0f, 0.0f, 284.0f, 25.0f)];
+    selectionView.backgroundColor = [UIColor clearColor];
+    self.selectionView = selectionView;
+    [self.contentView addSubview:self.selectionView];
+    
+    UILabel *quartLabel = [[UILabel alloc] initWithFrame:selectionView.bounds];
+    quartLabel.backgroundColor = [UIColor clearColor];
+    quartLabel.textAlignment = NSTextAlignmentCenter;
+    self.quartLabel = quartLabel;
+    [self.selectionView addSubview:quartLabel];
+
+    UIView *hourView = [[UIView alloc] initWithFrame:CGRectMake(31.0f, 0.0f, 284.0f, 25.0f)];
+    hourView.backgroundColor = [UIColor clearColor];
+    self.hourView = hourView;
+    [self.contentView addSubview:hourView];
+    
+    UILabel *hourLabel = [[UILabel alloc] initWithFrame:CGRectMake(7.0f, 1.0f, 29.0f, 21.0f)];
+    hourLabel.backgroundColor = [UIColor clearColor];
+    self.hourLabel = hourLabel;
+    [self.contentView addSubview:self.hourLabel];
+}
+
+#pragma mark - update 
 
 - (void)updateWithDayStartDate:(NSDate *)dayDate quartState:(CALQuartHourViewRdvState)state hour:(NSInteger)hour patientName:(NSString *)name
 {

@@ -26,6 +26,8 @@
 #import "CALAgendaMonthCollectionViewLayout.h"
 #import "CALAgendaDayCollectionViewLayout.h"
 
+#import "JMOLogMacro.h"
+
 @interface CALAgendaViewController () <UICollectionViewDelegate,UICollectionViewDataSource>
 
 //model
@@ -160,7 +162,8 @@
     if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
         if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
             CALMonthHeaderView *monthHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CALMonthHeaderView" forIndexPath:indexPath];
-            monthHeader.monthLabel.text = [self monthAtIndexPath:indexPath];
+            monthHeader.masterLabel.text = [self monthAtIndexPath:indexPath];
+            [monthHeader updateWithDayNames:@[@"DIM", @"LUN", @"MAR", @"MER", @"JEU", @"VEN", @"SAM"]];
             monthHeader.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95f];
             return monthHeader;
         }
@@ -223,8 +226,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s",__FUNCTION__);
-    self.dayStructured.date = [self dateAtIndexPath:indexPath];
+    JMOLog(@"%s",__FUNCTION__);
+    if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
+        self.dayStructured.date = [self dateAtIndexPath:indexPath];
+    }
     
     if ([self.agendaDelegate respondsToSelector:@selector(agendaCollectionView:didSelectItemAtIndexPath:selectedDate:)]) {
         [self.agendaDelegate agendaCollectionView:self.calendarCollectionView didSelectItemAtIndexPath:indexPath selectedDate:self.dayStructured.date];
@@ -265,7 +270,6 @@
         __weak CALAgendaViewController* blockSelf = self;
         [self.calendarCollectionView setCollectionViewLayout:collectionViewLayout animated:YES completion:^(BOOL finished) {
             [blockSelf.calendarCollectionView reloadData];
-            blockSelf.dayStructured.date = nil;
         }];
     }
 }

@@ -8,6 +8,7 @@
 
 #import "CALDay.h"
 #import "CALQuartHour.h"
+#import "JMOLogMacro.h"
 
 @implementation CALDay
 
@@ -66,7 +67,7 @@
 
 - (void)selectQuartsFrom:(NSInteger)from to:(NSInteger)to
 {
-    NSLog(@"select from %d to %d", from, to);
+    JMOLog(@"select from %d to %d", from, to);
     [self resetQuartsStates];
     CALQuartHourViewRdvState state = CALQuartHourViewRdvStateDebut;
     for (int i = from; i <= to; i++) {
@@ -99,12 +100,22 @@
 
 - (NSDate *)fromDate
 {
-    return [self.date dateByAddingTimeInterval:15*60*[self firstSelectedQuart]];
+    NSInteger firstSelectedQuart = [self firstSelectedQuart];
+    if (firstSelectedQuart == NSNotFound) {
+        return nil;
+    }
+    
+    return [self.date dateByAddingTimeInterval:15*60*firstSelectedQuart];
 }
 
 - (NSDate *)toDate
 {
-    return [self.date dateByAddingTimeInterval:15*60*([self lastSelectedQuart]+1)];
+    NSInteger lastSelectedQuart = [self lastSelectedQuart];
+    if (lastSelectedQuart == NSNotFound) {
+        return nil;
+    }
+    
+    return [self.date dateByAddingTimeInterval:15*60*(lastSelectedQuart+1)];
 }
 
 @end
