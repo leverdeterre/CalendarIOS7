@@ -3,8 +3,11 @@ CalendarStyle
 
 Calendar component for iOS apps
 
-#CellDayUIStyleIOS7
+#Cell Day iOS7 style
 ![Image](./Screenshots/CellDayUIStyleIOS7.PNG)
 
-#CellDayUIStyleCustom
+#Cell day custom style
 ![Image](./Screenshots/CellDayUIStyleCustom.PNG)
+
+#Cell hour selection
+![Image](./Screenshots/CellHourSelection.PNG)
