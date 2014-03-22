@@ -10,4 +10,4 @@ Calendar component for iOS apps
 ![Image](./Screenshots/CellDayUIStyleCustom.PNG)
 
 #Cell hour selection
-![Image](./Screenshots/CellHourSelection.PNG)
+![Image](./Screenshots/CellHourSelection.png)
