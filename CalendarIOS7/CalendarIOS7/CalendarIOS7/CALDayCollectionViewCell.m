@@ -96,6 +96,7 @@
 
     self.backgroundColor = [UIColor clearColor];
     [self removeTodayLayer];
+    [self setUserInteractionEnabled:YES];
     
     switch (type) {
         case CALDayCollectionViewCellDayTypeEmpty:
@@ -103,6 +104,7 @@
             [self.contentView setBackgroundColor:[UIColor clearColor]];
             [self.contentView.layer setCornerRadius:0.0f];
             [self.separatorLayer setBackgroundColor:[UIColor clearColor].CGColor];
+            [self setUserInteractionEnabled:NO];
             break;
             
         case CALDayCollectionViewCellDayTypeToday:

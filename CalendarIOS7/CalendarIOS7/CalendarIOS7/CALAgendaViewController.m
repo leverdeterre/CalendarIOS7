@@ -37,7 +37,6 @@
 @property (strong, nonatomic) NSDateComponents *timeComponents;
 
 @property (strong, nonatomic) NSDate *fromFirstDayMonth;
-@property (strong, nonatomic) NSDate *selectedDate;
 
 //Quarts selection
 @property (strong, nonatomic) CALDay *dayStructured;
@@ -170,7 +169,7 @@
         if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
             CALDayHeaderView *dayHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CALDayHeaderView" forIndexPath:indexPath];
             NSDateFormatter *formater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_EEEE_d_MMMM_yyyy];
-            dayHeader.dayLabel.text = [formater stringFromDate:self.selectedDate];
+            dayHeader.dayLabel.text = [formater stringFromDate:self.dayStructured.date];
             dayHeader.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95f];
             return dayHeader;
         }
@@ -225,8 +224,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%s",__FUNCTION__);
-    self.selectedDate = [self dateAtIndexPath:indexPath];
-    [self.agendaDelegate agendaCollectionView:self.calendarCollectionView didSelectItemAtIndexPath:indexPath selectedDate:self.selectedDate];
+    self.dayStructured.date = [self dateAtIndexPath:indexPath];
+    
+    if ([self.agendaDelegate respondsToSelector:@selector(agendaCollectionView:didSelectItemAtIndexPath:selectedDate:)]) {
+        [self.agendaDelegate agendaCollectionView:self.calendarCollectionView didSelectItemAtIndexPath:indexPath selectedDate:self.dayStructured.date];
+    }
     
     if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
         [self setDayModeForSelectedIndexPath:indexPath];
@@ -234,10 +236,13 @@
     else {
         BOOL canSelect = YES;
         if ([self.agendaDelegate respondsToSelector:@selector(agendaCollectionView:canSelectDate:)]) {
-            canSelect = [self.agendaDelegate agendaCollectionView:self.calendarCollectionView canSelectDate:[self.selectedDate dateByAddingTimeInterval:indexPath.row*15*60]];
+            canSelect = [self.agendaDelegate agendaCollectionView:self.calendarCollectionView canSelectDate:[self.dayStructured.date dateByAddingTimeInterval:indexPath.row*15*60]];
         }
         if (canSelect == YES) {
             [self collectionView:self.calendarCollectionView didSelecQuartAtIndexPath:indexPath];
+            if ([self.agendaDelegate respondsToSelector:@selector(agendaCollectionView:didSelectItemAtIndexPath:startDate:endDate:)]) {
+                [self.agendaDelegate agendaCollectionView:self.calendarCollectionView didSelectItemAtIndexPath:indexPath startDate:[self.dayStructured fromDate] endDate:[self.dayStructured toDate]];
+            }
         }
     }
 }
@@ -260,7 +265,7 @@
         __weak CALAgendaViewController* blockSelf = self;
         [self.calendarCollectionView setCollectionViewLayout:collectionViewLayout animated:YES completion:^(BOOL finished) {
             [blockSelf.calendarCollectionView reloadData];
-            blockSelf.selectedDate = nil;
+            blockSelf.dayStructured.date = nil;
         }];
     }
 }
@@ -296,6 +301,7 @@
             quart.state = CALQuartHourViewRdvStateNone;
             //[self.calendarCollectionView reloadItemsAtIndexPaths:@[indexPath]];
             [self.calendarCollectionView reloadData];
+            return;
         }
         
         if (last < first) {

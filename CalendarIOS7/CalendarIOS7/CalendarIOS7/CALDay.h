@@ -21,4 +21,7 @@
 - (void)selectQuartsFrom:(NSInteger)from to:(NSInteger)to;
 - (void)resetQuartsStates;
 
+- (NSDate *)fromDate;
+- (NSDate *)toDate;
+
 @end

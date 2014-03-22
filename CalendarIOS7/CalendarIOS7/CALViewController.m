@@ -69,12 +69,17 @@
 
 - (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath selectedDate:(NSDate *)selectedDate
 {
-    NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s %@", __FUNCTION__, selectedDate);
 }
 
 - (BOOL)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView canSelectDate:(NSDate *)selectedDate
 {
     return YES;
+}
+
+- (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath startDate:(NSDate *)startDate endDate:(NSDate *)endDate
+{
+    NSLog(@"%s %@ -> %@", __FUNCTION__,startDate, endDate);
 }
 
 @end

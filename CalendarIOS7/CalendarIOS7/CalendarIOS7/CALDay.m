@@ -55,7 +55,7 @@
 
 - (NSInteger)lastSelectedQuart
 {
-    for (int i = 0; i < self.quarts.count ; i++) {
+    for (int i =  self.quarts.count-1; i >= 0 ; i--) {
         CALQuartHour *quart = self.quarts[i];
         if ([quart isSelected]) {
             return i;
@@ -96,4 +96,15 @@
         quart.state = CALQuartHourViewRdvStateNone;
     }
 }
+
+- (NSDate *)fromDate
+{
+    return [self.date dateByAddingTimeInterval:15*60*[self firstSelectedQuart]];
+}
+
+- (NSDate *)toDate
+{
+    return [self.date dateByAddingTimeInterval:15*60*([self lastSelectedQuart]+1)];
+}
+
 @end
