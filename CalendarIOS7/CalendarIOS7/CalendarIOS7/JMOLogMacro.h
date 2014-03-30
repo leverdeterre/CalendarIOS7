@@ -3,8 +3,8 @@
 //  Copyright (c) 2013 Jerome Morissard. All rights reserved.
 //
 
-#ifndef iAppInfos_LogMacro_h
-#define iAppInfos_LogMacro_h
+#ifndef JMOLogMacro_h
+#define JMOLogMacro_h
 
 // Log using the same parameters above but include the function name and source code line number in the log statement
 #ifdef DEBUG

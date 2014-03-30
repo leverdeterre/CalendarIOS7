@@ -69,7 +69,7 @@
 - (void)updateWithDayStartDate:(NSDate *)dayDate quartState:(CALQuartHourViewRdvState)state hour:(NSInteger)hour patientName:(NSString *)name
 {
     _eventTimeState = state;
-    NSDateFormatter *heureFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_HH_mm];
+    //NSDateFormatter *heureFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_HH_mm];
     self.selectionView.hidden = NO;
     self.dateDebut = dayDate;
     

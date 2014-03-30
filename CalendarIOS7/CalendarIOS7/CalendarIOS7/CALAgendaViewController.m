@@ -39,7 +39,7 @@
 @property (strong, nonatomic) NSDateComponents *timeComponents;
 
 @property (strong, nonatomic) NSDate *fromFirstDayMonth;
-
+@property (strong, nonatomic) CALAgendaMonthCollectionViewLayout *collectionMonthLayout;
 //Quarts selection
 @property (strong, nonatomic) CALDay *dayStructured;
 
@@ -57,8 +57,11 @@
     self.title = @"Agenda";
     self.calendar = [NSDate gregorianCalendar];
     
-    CALAgendaMonthCollectionViewLayout *collectionViewLayout = [CALAgendaMonthCollectionViewLayout new];
-    self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:collectionViewLayout];
+    self.collectionMonthLayout = [CALAgendaMonthCollectionViewLayout new];
+    self.collectionMonthLayout.scrollDirection = self.calendarScrollDirection;
+    self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.collectionMonthLayout];
+    self.calendarCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+
     self.calendarCollectionView.delegate = self;
     [self.view addSubview:self.calendarCollectionView];
     self.calendarCollectionView.dataSource = self;
@@ -101,10 +104,16 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if([collectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
-        NSDate *firstDay = [self dateForFirstDayInSection:section];
-        NSInteger weekDay = [firstDay weekDay] -1;
-        NSInteger items =  weekDay + [NSDate numberOfDaysInMonthForDate:firstDay];
-        return items;
+        if (self.collectionMonthLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+            NSDate *firstDay = [self dateForFirstDayInSection:section];
+            return  [NSDate numberOfDaysInMonthForDate:firstDay];
+        }
+        else {
+            NSDate *firstDay = [self dateForFirstDayInSection:section];
+            NSInteger weekDay = [firstDay weekDay] -1;
+            NSInteger items =  weekDay + [NSDate numberOfDaysInMonthForDate:firstDay];
+            return items;
+        }
     }
 
     return 24 * 4;
@@ -188,6 +197,9 @@
 {
     NSDate *firstDay = [self dateForFirstDayInSection:indexPath.section];
     NSInteger weekDay = [firstDay weekDay];
+    if (self.collectionMonthLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+        weekDay = 1;
+    }
     NSDate *dateToReturn = nil;
     
     if (indexPath.row < (weekDay-1)) {
@@ -265,10 +277,8 @@
     [[self navigationItem] setLeftBarButtonItem:nil animated:YES];
     
     if ([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaDayCollectionViewLayout class]]) {
-        CALAgendaMonthCollectionViewLayout *collectionViewLayout = [CALAgendaMonthCollectionViewLayout new];
-
         __weak CALAgendaViewController* blockSelf = self;
-        [self.calendarCollectionView setCollectionViewLayout:collectionViewLayout animated:YES completion:^(BOOL finished) {
+        [self.calendarCollectionView setCollectionViewLayout:self.collectionMonthLayout animated:YES completion:^(BOOL finished) {
             [blockSelf.calendarCollectionView reloadData];
         }];
     }

@@ -55,7 +55,16 @@
 
     [self registerClass:[CALDayHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALDayHeaderView"];
     [self registerClass:[CALMonthHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALMonthHeaderView"];
-    
+ 
+    if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+        if (flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+            self.pagingEnabled = YES;
+        }
+        else {
+            self.pagingEnabled = NO;
+        }
+    }
 }
 
 

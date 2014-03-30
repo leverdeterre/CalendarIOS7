@@ -18,8 +18,8 @@
 @property (strong, nonatomic) NSDate *toDate;
 @property (weak, nonatomic) id <CALAgendaCollectionViewDelegate> agendaDelegate;
 @property (assign, nonatomic) CALDayCollectionViewCellDayUIStyle dayStyle;
+@property (assign, nonatomic) UICollectionViewScrollDirection calendarScrollDirection;
 
 - (void)reloadContent;
-
 
 @end

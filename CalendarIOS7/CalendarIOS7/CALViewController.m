@@ -32,9 +32,20 @@
     NSLog(@"%s",__FUNCTION__);
 }
 
-- (IBAction)showMyCalendar:(id)sender
+- (IBAction)showMyCalendariOS7Vertical:(id)sender
+{
+    [self showMyCalendarWithScrollDirection:UICollectionViewScrollDirectionVertical];
+}
+
+- (IBAction)showMyCalendariOS7Horizontal:(id)sender
+{
+    [self showMyCalendarWithScrollDirection:UICollectionViewScrollDirectionHorizontal];
+}
+
+- (void)showMyCalendarWithScrollDirection:(UICollectionViewScrollDirection)direction
 {
     self.agendaVc = [CALAgendaViewController new];
+    self.agendaVc.calendarScrollDirection = direction;
     self.agendaVc.agendaDelegate = self;
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
@@ -47,6 +58,7 @@
     self.agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleIOS7;
     [self.navigationController pushViewController:self.agendaVc animated:YES];
 }
+
 
 - (IBAction)showMyCalendarStyleCustom:(id)sender
 {

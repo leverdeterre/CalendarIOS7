@@ -131,7 +131,7 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 
 - (NSDate *)startingDate
 {
-    NSDateComponents *components = [[NSDate gregorianCalendar] components:ETINSCalendarUnitFullDay fromDate:self];
+    NSDateComponents *components = [[NSDate gregorianCalendar] components:(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:self];
     components.hour = 0;
     components.minute = 0;
     components.second = 0;
@@ -140,7 +140,7 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 
 - (NSDate *)endingDate
 {
-    NSDateComponents *components = [[NSDate gregorianCalendar] components:ETINSCalendarUnitFullDay fromDate:self];
+    NSDateComponents *components = [[NSDate gregorianCalendar] components:(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond) fromDate:self];
     components.hour = 23;
     components.minute = 59;
     components.second = 59;

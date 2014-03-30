@@ -30,9 +30,4 @@
 - (NSDate *)startingDate;
 - (NSDate *)endingDate;
 
-typedef NS_OPTIONS(NSInteger,  NSCalendarUnitCombinary) {
-    ETINSCalendarUnitFullDay = (NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour|NSCalendarUnitMinute|NSCalendarUnitSecond),
-};
-
-
 @end

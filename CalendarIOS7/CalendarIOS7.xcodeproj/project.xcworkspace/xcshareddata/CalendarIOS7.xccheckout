@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4670C657-6A33-48EF-8834-9F14AFA9A9FB</string>
+	<string>FFA4F85A-9535-4B8E-9A28-D2D8C72ACE76</string>
 	<key>IDESourceControlProjectName</key>
 	<string>CalendarIOS7</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D09EADD9-571F-483B-8DF7-8F756F3F6F59</key>
-		<string>https://github.com/leverdeterre/CalendarStyle.git</string>
+		<key>74BA87BD-1B83-48D8-BF6E-EB4EED559AEA</key>
+		<string>https://github.com/leverdeterre/CalendarIOS7.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>CalendarIOS7/CalendarIOS7.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D09EADD9-571F-483B-8DF7-8F756F3F6F59</key>
+		<key>74BA87BD-1B83-48D8-BF6E-EB4EED559AEA</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/leverdeterre/CalendarStyle.git</string>
+	<string>https://github.com/leverdeterre/CalendarIOS7.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D09EADD9-571F-483B-8DF7-8F756F3F6F59</string>
+	<string>74BA87BD-1B83-48D8-BF6E-EB4EED559AEA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D09EADD9-571F-483B-8DF7-8F756F3F6F59</string>
+			<string>74BA87BD-1B83-48D8-BF6E-EB4EED559AEA</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CalendarStyle</string>
+			<string>CalendarIOS7</string>
 		</dict>
 	</array>
 </dict>
