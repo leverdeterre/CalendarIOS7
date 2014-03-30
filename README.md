@@ -3,7 +3,7 @@ Calendar iOS
 
 Calendar iOS is a very simple calendar/date picker component for your iOS apps based on UICollectionView and 2 layouts.
 
-Cell Day iOS7 style
+Day cells styles
 ---------------------------------------------------
 ![Image](./Screenshots/Calendar.png)
 
