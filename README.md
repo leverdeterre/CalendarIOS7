@@ -7,6 +7,13 @@ Day cells styles
 ---------------------------------------------------
 ![Image](./Screenshots/Calendar.png)
 
+## Changes
+---------------------------------------------------
+v 0.0.2 
+	Implementation of horizontal scrollDirection
+	
+v 0.0.1 
+	Draft version
 
 Supported iOS & SDK Versions
 ---------------------------------------------------
@@ -19,6 +26,7 @@ Creating a CalendarViewController
 
 ```objc
     CALAgendaViewController *agendaVc = [CALAgendaViewController new];
+    agendaVc.calendarScrollDirection = UICollectionViewScrollDirectionHorizontal;
     agendaVc.agendaDelegate = self;
     [agendaVc setFromDate:fromDate];
     [agendaVc setToDate:toDate];
