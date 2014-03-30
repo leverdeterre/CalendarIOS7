@@ -14,6 +14,7 @@
 {
     self = [super init];
     if (self) {
+        self.scrollDirection = UICollectionViewScrollDirectionVertical;
         self.headerReferenceSize = CGSizeMake(320.0f, 30.0f);
         self.itemSize = CGSizeMake(320.0f, 25.0f);
         self.minimumLineSpacing = 0.0f;

@@ -55,7 +55,12 @@
 
     [self registerClass:[CALDayHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALDayHeaderView"];
     [self registerClass:[CALMonthHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CALMonthHeaderView"];
- 
+    
+    [self updatePagination];
+}
+
+- (void)updatePagination
+{
     if ([self.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
         UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
         if (flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
@@ -65,6 +70,31 @@
             self.pagingEnabled = NO;
         }
     }
+}
+
+- (void)updatePaginationWithLayout:(UICollectionViewLayout *)layout
+{
+    if ([layout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)layout;
+        if (flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
+            self.pagingEnabled = YES;
+        }
+        else {
+            self.pagingEnabled = NO;
+        }
+    }
+}
+
+- (void)setCollectionViewLayout:(UICollectionViewLayout *)layout animated:(BOOL)animated
+{
+    [self updatePaginationWithLayout:layout];
+    [super setCollectionViewLayout:layout animated:animated];
+}
+
+- (void)setCollectionViewLayout:(UICollectionViewLayout *)layout animated:(BOOL)animated completion:(void (^)(BOOL finished))completion
+{
+    [self updatePaginationWithLayout:layout];
+    [super setCollectionViewLayout:layout animated:animated completion:completion];
 }
 
 

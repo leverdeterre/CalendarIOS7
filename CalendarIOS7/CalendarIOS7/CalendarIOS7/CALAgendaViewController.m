@@ -302,7 +302,6 @@
 {
     if ([self.dayStructured numberOfSelectedQuarts] == 0) {
         [self.dayStructured selectQuartsFrom:indexPath.row to:indexPath.row];
-        //[self.calendarCollectionView reloadItemsAtIndexPaths:@[indexPath]];
         [self.calendarCollectionView reloadData];
     }
     else if ([self.dayStructured numberOfSelectedQuarts] == 1) {
