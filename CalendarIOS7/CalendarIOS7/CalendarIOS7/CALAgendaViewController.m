@@ -104,16 +104,10 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if([collectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
-        if (self.collectionMonthLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-            NSDate *firstDay = [self dateForFirstDayInSection:section];
-            return  [NSDate numberOfDaysInMonthForDate:firstDay];
-        }
-        else {
-            NSDate *firstDay = [self dateForFirstDayInSection:section];
-            NSInteger weekDay = [firstDay weekDay] -1;
-            NSInteger items =  weekDay + [NSDate numberOfDaysInMonthForDate:firstDay];
-            return items;
-        }
+        NSDate *firstDay = [self dateForFirstDayInSection:section];
+        NSInteger weekDay = [firstDay weekDay] -1;
+        NSInteger items =  weekDay + [NSDate numberOfDaysInMonthForDate:firstDay];
+        return items;
     }
 
     return 24 * 4;
@@ -197,9 +191,6 @@
 {
     NSDate *firstDay = [self dateForFirstDayInSection:indexPath.section];
     NSInteger weekDay = [firstDay weekDay];
-    if (self.collectionMonthLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        weekDay = 1;
-    }
     NSDate *dateToReturn = nil;
     
     if (indexPath.row < (weekDay-1)) {
