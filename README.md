@@ -54,13 +54,23 @@ Delegation : CALAgendaCollectionViewDelegate
 
 Other protocols : CALgendaEvent
 ---------------------------------------------------
-To be implemented by your Event objects to be presented in the calendar. (in progress)
+
+
+```objc
+@protocol CALgendaEvent <NSObject>
+
+- (NSDate *)eventStartDate;
+- (NSDate *)eventEndDate;
+- (NSString *)eventName;
+
+@end
+```
+
 
 TODOS
 ---------------------------------------------------
 
 - Improve genericity and customization of cells,
-- Manage events / days
 - Hours selection is a draft version .. so i'have to finish it :)
 
 
