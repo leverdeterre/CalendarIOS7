@@ -54,7 +54,9 @@ Delegation : CALAgendaCollectionViewDelegate
 
 Other protocols : CALgendaEvent
 ---------------------------------------------------
-
+If events are availble, cell can be customize to present this state.
+The calendar view controller can get a array of events.
+Events have just to implement this protocol.
 
 ```objc
 @protocol CALgendaEvent <NSObject>
