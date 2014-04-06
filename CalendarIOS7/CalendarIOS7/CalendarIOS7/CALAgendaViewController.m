@@ -14,6 +14,7 @@
 #import "NSDate+Agenda.h"
 #import "CALDay.h"
 #import "CALQuartHour.h"
+#import "CALAgendaEvent.h"
 
 //UI
 #import "CALMonthHeaderView.h"
@@ -66,6 +67,7 @@
     [self.view addSubview:self.calendarCollectionView];
     self.calendarCollectionView.dataSource = self;
     self.dayStructured = [CALDay new];
+    [self reloadContent];
 }
 
 - (void)setFromDate:(NSDate *)fromDate
@@ -88,7 +90,23 @@
 - (void)reloadContent
 {
     self.fromFirstDayMonth = [_fromDate firstDayOfTheMonth];
+    [self updateEventGroupByDays];
     [self.calendarCollectionView reloadData];
+}
+
+- (void)updateEventGroupByDays
+{
+    self.eventsGroupByDay = [NSMutableDictionary new];
+    for (id <CALgendaEvent> obj in self.events) {
+        NSDate *startDate = [obj eventStartDate];
+        NSDateFormatter *sectionFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_dd_MM_yyyy];
+        NSMutableArray *events = [self.eventsGroupByDay objectForKey:[sectionFormater stringFromDate:startDate]];
+        if (events == nil) {
+            events = [NSMutableArray new];
+        }
+        [events addObject:obj];
+        [self.eventsGroupByDay setObject:events forKey:[sectionFormater stringFromDate:startDate]];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -126,6 +144,11 @@
         CALDayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CALDayCollectionViewCell" forIndexPath:indexPath];
         NSDate *date = [self dateAtIndexPath:indexPath];
         cell.style = self.dayStyle;
+        
+        NSArray *events = [self eventsAtIndexPath:indexPath];
+        if (events.count > 0) {
+            JMOLog(@"");
+        }
         if ( nil == date ) {
             [cell setType:CALDayCollectionViewCellDayTypeEmpty];
         }

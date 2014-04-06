@@ -19,6 +19,9 @@
 
 //today
 @property (strong, nonatomic) CALayer *todayLayer;
+
+//events
+@property (strong, nonatomic) CALayer *eventsLayer;
 @end
 
 @implementation CALDayCollectionViewCell
@@ -85,9 +88,14 @@
 {
     [self updateCellWithDate:date];
     if (nbEvents > 0) {
-        self.nbEventsLabel.text = [NSString stringWithFormat:@"%d", nbEvents];
+        //self.nbEventsLabel.text = [NSString stringWithFormat:@"%d", nbEvents];
     } else {
         self.nbEventsLabel.text = @"";
+    }
+    
+    [self removeEventsLayer];
+    if (nbEvents > 0) {
+        [self addEventsLayer];
     }
 }
 
@@ -142,5 +150,35 @@
     }
 }
 
+#pragma mark - eventLayer
+
+- (void)addEventsLayer
+{
+    // Set up the shape of the circle
+    int radius = 3;
+    CAShapeLayer *circle = [CAShapeLayer layer];
+    // Make a circular shape
+    circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
+                                             cornerRadius:radius].CGPath;
+    // Center the shape in self.view
+    circle.position = CGPointMake(CGRectGetMidX(self.bounds)-radius,
+                                  CGRectGetMaxY(self.bounds)-radius - 5.0f);
+    
+    // Configure the apperence of the circle
+    circle.fillColor = [UIColor grayColor].CGColor;
+    circle.strokeColor = [UIColor grayColor].CGColor;
+    circle.lineWidth = 1;
+    
+    self.eventsLayer = circle;
+    
+    // Add to parent layer
+    [self.layer addSublayer:self.eventsLayer];
+}
+
+- (void)removeEventsLayer
+{
+    [self.eventsLayer removeFromSuperlayer];
+    self.eventsLayer = nil;
+}
 
 @end

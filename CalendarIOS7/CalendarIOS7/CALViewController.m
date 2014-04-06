@@ -12,9 +12,11 @@
 #import "NSDate+Agenda.h"
 #import "NSDate+ETI.h"
 #import "CALAgenda.h"
+#import "JMOEvent.h"
 
 @interface CALViewController () <UICollectionViewDelegate, CALAgendaCollectionViewDelegate>
 @property (nonatomic, strong) CALAgendaViewController *agendaVc;
+@property (nonatomic, strong) JMOEvent *event;
 @end
 
 @implementation CALViewController
@@ -49,12 +51,14 @@
     self.agendaVc.agendaDelegate = self;
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
-    components.month = -1;
+    components.month = -3;
     NSDate *fromDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
     components.month = 6;
     NSDate* toDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
     [self.agendaVc setFromDate:fromDate];
     [self.agendaVc setToDate:toDate];
+    
+    self.agendaVc.events = [self fakeEvents];
     self.agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleIOS7;
     [self.navigationController pushViewController:self.agendaVc animated:YES];
 }
@@ -66,14 +70,65 @@
     self.agendaVc.agendaDelegate = self;
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
-    components.month = -1;
+    components.month = -3;
     NSDate *fromDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
     components.month = 6;
     NSDate* toDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
     [self.agendaVc setFromDate:fromDate];
     [self.agendaVc setToDate:toDate];
+    
+    self.agendaVc.events = [self fakeEvents];
     self.agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleCustom1;
     [self.navigationController pushViewController:self.agendaVc animated:YES];
+}
+
+#pragma mark - helpers
+- (NSArray *)fakeEvents
+{
+    NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
+    NSDateComponents *components = [NSDateComponents new];
+    components.month = -3;
+    
+    JMOEvent *event1 = [JMOEvent new];
+    components.day = 3;
+    components.month = 0;
+    components.hour = 11;
+    event1.startDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.month = 0;
+    components.day = 3;
+    components.hour = 12;
+    event1.endDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    
+    JMOEvent *event2 = [JMOEvent new];
+    components.day = 2;
+    components.month = 1;
+    components.hour = 11;
+    event2.startDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.month = 1;
+    components.day = 2;
+    components.hour = 12;
+    event2.endDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    
+    JMOEvent *event3 = [JMOEvent new];
+    components.day = 1;
+    components.month = -3;
+    components.hour = 11;
+    event3.startDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.day = 1;
+    components.month = -3;
+    components.hour = 12;
+    event3.endDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    
+    JMOEvent *event4 = [JMOEvent new];
+    components.day = 2;
+    components.month = -3;
+    components.hour = 11;
+    event4.startDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.day = 2;
+    components.month = -3;
+    components.hour = 19;
+    event4.endDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    return @[event1, event2,event3, event4];
 }
 
 
@@ -100,6 +155,7 @@
         [[self.agendaVc navigationItem] setRightBarButtonItem:nil animated:YES];
     }
 }
+
 
 
 @end

@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) NSDate *fromDate;
 @property (strong, nonatomic) NSDate *toDate;
+@property (strong, nonatomic) NSArray *events;
 @property (weak, nonatomic) id <CALAgendaCollectionViewDelegate> agendaDelegate;
 @property (assign, nonatomic) CALDayCollectionViewCellDayUIStyle dayStyle;
 @property (assign, nonatomic) UICollectionViewScrollDirection calendarScrollDirection;
