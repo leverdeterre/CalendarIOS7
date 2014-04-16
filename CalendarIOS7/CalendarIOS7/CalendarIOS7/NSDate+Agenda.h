@@ -29,5 +29,6 @@
 
 - (NSDate *)startingDate;
 - (NSDate *)endingDate;
++ (NSArray *)weekdaySymbols;
 
 @end

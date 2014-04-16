@@ -189,7 +189,7 @@
         if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
             CALMonthHeaderView *monthHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CALMonthHeaderView" forIndexPath:indexPath];
             monthHeader.masterLabel.text = [self monthAtIndexPath:indexPath];
-            [monthHeader updateWithDayNames:@[@"DIM", @"LUN", @"MAR", @"MER", @"JEU", @"VEN", @"SAM"]];
+            [monthHeader updateWithDayNames:[NSDate weekdaySymbols]];
             monthHeader.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95f];
             return monthHeader;
         }

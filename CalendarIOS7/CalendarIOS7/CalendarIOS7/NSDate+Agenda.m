@@ -147,4 +147,14 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return [[NSDate gregorianCalendar] dateFromComponents:components];
 }
 
++ (NSArray *)weekdaySymbols
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSMutableArray *upper = [NSMutableArray new];
+    for (NSString *day in [dateFormatter shortWeekdaySymbols]) {
+        [upper addObject:day.uppercaseString];
+    }
+    return  upper;
+}
+
 @end
