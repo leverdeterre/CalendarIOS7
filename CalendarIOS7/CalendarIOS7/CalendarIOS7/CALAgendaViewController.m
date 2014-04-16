@@ -236,7 +236,7 @@
     dateFormatter.calendar = self.calendar;
     dateFormatter.dateFormat = [dateFormatter.class dateFormatFromTemplate:@"yyyyLLLL" options:0 locale:[NSDate locale]];
     
-    NSDate *date = [self dateForFirstDayInSection:indexPath.section];
+    NSDate *date = [self dateForFirstDayInSection:indexPath.section+1];
     return [dateFormatter stringFromDate:date];
 }
 
