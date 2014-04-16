@@ -26,6 +26,12 @@
 
 @implementation CALDayCollectionViewCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self removeEventsLayer];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

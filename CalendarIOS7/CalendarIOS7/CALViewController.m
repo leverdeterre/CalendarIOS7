@@ -49,12 +49,14 @@
     self.agendaVc = [CALAgendaViewController new];
     self.agendaVc.calendarScrollDirection = direction;
     self.agendaVc.agendaDelegate = self;
-    NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
-    components.month = -3;
-    NSDate *fromDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
-    components.month = 6;
-    NSDate* toDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.month = 1;
+    components.day = 1;
+    components.year = 2014;
+    NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    components.month = 3;
+    components.day = 1;
+    NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     [self.agendaVc setFromDate:fromDate];
     [self.agendaVc setToDate:toDate];
     
@@ -68,12 +70,14 @@
 {
     self.agendaVc = [CALAgendaViewController new];
     self.agendaVc.agendaDelegate = self;
-    NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];
     NSDateComponents *components = [NSDateComponents new];
-    components.month = -3;
-    NSDate *fromDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
-    components.month = 6;
-    NSDate* toDate = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:now options:0];
+    components.month = 1;
+    components.year = 2014;
+    components.day = 1;
+    NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
+    components.month = 3;
+    components.day = 1;
+    NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     [self.agendaVc setFromDate:fromDate];
     [self.agendaVc setToDate:toDate];
     

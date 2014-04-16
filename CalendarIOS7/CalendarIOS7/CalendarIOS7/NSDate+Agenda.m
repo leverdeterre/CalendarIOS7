@@ -75,7 +75,7 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 + (NSInteger)numberOfMonthFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
 {
     NSCalendar *gregorian = [self gregorianCalendar];
-    return [gregorian components:NSMonthCalendarUnit fromDate:fromDate toDate:toDate options:0].month;
+    return [gregorian components:NSMonthCalendarUnit fromDate:fromDate toDate:toDate options:0].month+1;
 }
 
 + (NSInteger)numberOfDaysInMonthForDate:(NSDate *)fromDate
