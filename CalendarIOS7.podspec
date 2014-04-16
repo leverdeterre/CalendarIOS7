@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CalendarIOS7"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "A short description of CalendarIOS7."
   s.requires_arc = true
 
