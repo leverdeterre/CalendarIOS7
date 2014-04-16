@@ -9,6 +9,9 @@ Day cells styles
 
 ## Changes
 ---------------------------------------------------
+v 0.0.3 
+	fix section number (number of months between two dates)
+	update app localization	
 v 0.0.2 
 	Implementation of horizontal scrollDirection
 	
