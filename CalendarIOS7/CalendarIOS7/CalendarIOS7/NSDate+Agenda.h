@@ -30,5 +30,6 @@
 - (NSDate *)startingDate;
 - (NSDate *)endingDate;
 + (NSArray *)weekdaySymbols;
++ (NSString *)monthSymbolAtIndex:(NSInteger)index;
 
 @end

@@ -232,12 +232,18 @@
 
 - (NSString *)monthAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     dateFormatter.calendar = self.calendar;
     dateFormatter.dateFormat = [dateFormatter.class dateFormatFromTemplate:@"yyyyLLLL" options:0 locale:[NSDate locale]];
     
     NSDate *date = [self dateForFirstDayInSection:indexPath.section];
     return [dateFormatter stringFromDate:date];
+     */
+    
+    NSDate *date = [self dateForFirstDayInSection:indexPath.section];
+    NSDateComponents *components = [[NSDate gregorianCalendar] components:NSMonthCalendarUnit fromDate:date];
+    return [NSDate monthSymbolAtIndex:components.month];
 }
 
 - (NSArray *)eventsAtIndexPath:(NSIndexPath *)indexPath

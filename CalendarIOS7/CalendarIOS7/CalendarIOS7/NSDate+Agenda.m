@@ -157,4 +157,11 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return  upper;
 }
 
++ (NSString *)monthSymbolAtIndex:(NSInteger)index
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSArray *months = [dateFormatter monthSymbols];
+    return months[index - 1];
+}
+
 @end
