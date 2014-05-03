@@ -1,5 +1,9 @@
 Calendar iOS
 ==================
+[![Twitter](https://img.shields.io/badge/contact-@leverdeterre-green.svg)](http://twitter.com/leverdeterre)
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg)](http://github.com/leverdeterre/CalendarIOS7/LICENSE)
+[![CocoaPods](http://img.shields.io/github/release/leverdeterre/CalendarIOS7.svg)](https://github.com/CalendarIOS7)
+
 
 Calendar iOS is a very simple calendar/date picker component for your iOS apps based on UICollectionView and 2 layouts.
 
