@@ -130,13 +130,12 @@ static NSString * const CALAgendaMonthCollectionViewLayoutHeader = @"CALAgendaMo
         else {
             CGRect theoricalRect = previousRect;
             theoricalRect.origin.x = theoricalRect.origin.x + self.minimumInteritemSpacing + self.itemSize.width;
-            if ((theoricalRect.origin.x + self.itemSize.width) > self.collectionView.frame.size.width) {
-                theoricalRect.origin.x = 0.0f;
-                theoricalRect.origin.y = theoricalRect.origin.y + self.minimumLineSpacing + self.itemSize.height;
-            }
             if ((indexPath.section - previousIndexPath.section) > 0) {
                 theoricalRect.origin.y = theoricalRect.origin.y + self.itemSize.height + self.headerReferenceSize.height + self.minimumLineSpacing;
                 theoricalRect.origin.x = 0.0f;
+            }else if ((theoricalRect.origin.x + self.itemSize.width) > self.collectionView.frame.size.width) {
+                theoricalRect.origin.x = 0.0f;
+                theoricalRect.origin.y = theoricalRect.origin.y + self.minimumLineSpacing + self.itemSize.height;
             }
             return theoricalRect;
         }
