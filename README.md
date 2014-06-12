@@ -27,9 +27,15 @@ Supported iOS & SDK Versions
 
 * Earliest supported deployment target - iOS 6.0
 
+Installation
+---------------------------------------------------
+```objc
+pod 'CalendarIOS7'
+```
+
+
 Creating a CalendarViewController
 ---------------------------------------------------
-
 
 ```objc
     CALAgendaViewController *agendaVc = [CALAgendaViewController new];
