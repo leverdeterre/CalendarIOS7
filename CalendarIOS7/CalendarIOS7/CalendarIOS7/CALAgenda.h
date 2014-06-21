@@ -15,6 +15,7 @@
 
 //Layouts
 #import "CALAgendaMonthCollectionViewLayout.h"
+#import "CALAgendaLinearMonthCollectionViewLayout.h"
 #import "CALAgendaDayCollectionViewLayout.h"
 
 //Agenda CollectionView

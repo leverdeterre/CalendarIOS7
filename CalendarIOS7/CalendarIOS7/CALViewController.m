@@ -50,7 +50,7 @@
     self.agendaVc.calendarScrollDirection = direction;
     self.agendaVc.agendaDelegate = self;
     NSDateComponents *components = [NSDateComponents new];
-    components.month = 5;
+    components.month = 4;
     components.day = 1;
     components.year = 2014;
     NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
@@ -69,13 +69,14 @@
 - (IBAction)showMyCalendarStyleCustom:(id)sender
 {
     self.agendaVc = [CALAgendaViewController new];
+    self.agendaVc.collectionViewLayoutClass = CALAgendaLinearMonthCollectionViewLayout.class;
     self.agendaVc.agendaDelegate = self;
     NSDateComponents *components = [NSDateComponents new];
-    components.month = 1;
+    components.month = 4;
     components.year = 2014;
     components.day = 1;
     NSDate *fromDate = [[NSDate gregorianCalendar] dateFromComponents:components];
-    components.month = 3;
+    components.month = 12;
     components.day = 1;
     NSDate *toDate = [[NSDate gregorianCalendar] dateFromComponents:components];
     [self.agendaVc setFromDate:fromDate];

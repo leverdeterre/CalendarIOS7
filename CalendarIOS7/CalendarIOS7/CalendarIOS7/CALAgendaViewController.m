@@ -26,6 +26,7 @@
 //Layout
 #import "CALAgendaMonthCollectionViewLayout.h"
 #import "CALAgendaDayCollectionViewLayout.h"
+#import "CALAgendaLinearMonthCollectionViewLayout.h"
 
 #import "JMOLogMacro.h"
 
@@ -58,11 +59,18 @@
     self.title = @"Agenda";
     self.calendar = [NSDate gregorianCalendar];
     
-    self.collectionMonthLayout = [CALAgendaMonthCollectionViewLayout new];
-    self.collectionMonthLayout.scrollDirection = self.calendarScrollDirection;
-    self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.collectionMonthLayout];
-    self.calendarCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-
+    if (self.collectionViewLayoutClass) {
+        self.collectionMonthLayout = [self.collectionViewLayoutClass new];
+        self.collectionMonthLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+        self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.collectionMonthLayout];
+        self.calendarCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    } else {
+        self.collectionMonthLayout = [CALAgendaMonthCollectionViewLayout new];
+        self.collectionMonthLayout.scrollDirection = self.calendarScrollDirection;
+        self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.collectionMonthLayout];
+        self.calendarCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    }
+    
     self.calendarCollectionView.delegate = self;
     [self.view addSubview:self.calendarCollectionView];
     self.calendarCollectionView.dataSource = self;
@@ -115,6 +123,8 @@
 {
     if([collectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
         return [NSDate numberOfMonthFromDate:self.fromFirstDayMonth toDate:self.toDate];
+    } else if ([collectionView.collectionViewLayout isKindOfClass:[CALAgendaLinearMonthCollectionViewLayout class]]) {
+        return 1; //group them all
     }
     return 1;
 }
@@ -126,8 +136,12 @@
         NSInteger weekDay = [firstDay weekDay] -1;
         NSInteger items =  weekDay + [NSDate numberOfDaysInMonthForDate:firstDay];
         return items;
+    } else if ([collectionView.collectionViewLayout isKindOfClass:[CALAgendaLinearMonthCollectionViewLayout class]]) {
+        NSInteger days = [NSDate numberOfDaysFromDate:[self.fromDate firstDayOfTheMonth] toDate:[self.toDate lastDayOfTheMonth]];
+        return days;
     }
 
+    //else quartHour
     return 24 * 4;
 }
 
@@ -165,8 +179,37 @@
         }
         
         return cell;
-    }
-    else {
+    } else if([collectionView.collectionViewLayout isKindOfClass:[CALAgendaLinearMonthCollectionViewLayout class]]) {
+        CALDayCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CALDayCollectionViewCell" forIndexPath:indexPath];
+        NSDate *date = [self dateAtIndexPath:indexPath];
+        if ( nil == date ) {
+            [cell setType:CALDayCollectionViewCellDayTypeEmpty];
+        }
+        else {
+            if ([date isToday]) {
+                [cell setType:CALDayCollectionViewCellDayTypeToday];
+            }
+            else {
+                [cell setType:CALDayCollectionViewCellDayTypeFutur];
+            }
+            
+            //NSLog(@"date:%@ events:%d",[self dateAtIndexPath:indexPath],[self eventsAtIndexPath:indexPath].count);
+            [cell updateCellWithDate:[self dateAtIndexPath:indexPath] andEvents:[self eventsAtIndexPath:indexPath].count];
+            if (date.dayComponents == 1) {
+                NSDateFormatter *dateFormatter = [NSDateFormatter dateFormatterForType:CALDateFormatterType_MMM];
+                [cell activateMonthName:[dateFormatter stringFromDate:date]];
+            }
+            
+            if (date.monthComponents % 2 ) {
+                cell.contentView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.05f];
+            } else {
+                cell.contentView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.f];
+            }
+        }
+        
+        return cell;
+        
+    } else {
         CALQuartHourCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CALQuartHourCollectionViewCell" forIndexPath:indexPath];
         
         NSInteger hour = NSNotFound;
@@ -193,8 +236,7 @@
             monthHeader.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.95f];
             return monthHeader;
         }
-	}
-    else {
+	} else {
         if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
             CALDayHeaderView *dayHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"CALDayHeaderView" forIndexPath:indexPath];
             NSDateFormatter *formater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_EEEE_d_MMMM_yyyy];
@@ -212,22 +254,28 @@
 
 - (NSDate *)dateAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *firstDay = [self dateForFirstDayInSection:indexPath.section];
-    NSInteger weekDay = [firstDay weekDay];
-    NSDate *dateToReturn = nil;
-    
-    if (indexPath.row < (weekDay-1)) {
-        dateToReturn = nil;
+    if([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaMonthCollectionViewLayout class]]) {
+        NSDate *firstDay = [self dateForFirstDayInSection:indexPath.section];
+        NSInteger weekDay = [firstDay weekDay];
+        NSDate *dateToReturn = nil;
+        
+        if (indexPath.row < (weekDay-1)) {
+            dateToReturn = nil;
+        }
+        else {
+            NSDateComponents *components = [[NSDate gregorianCalendar] components:NSMonthCalendarUnit| NSCalendarUnitDay fromDate:firstDay];
+            [components setDay:indexPath.row - (weekDay - 1)];
+            [components setMonth:indexPath.section];
+            dateToReturn = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:self.fromFirstDayMonth options:0];
+        }
+        
+        //NSLog(@"Date at indexPath:%@ -> %@", indexPath,dateToReturn);
+        return dateToReturn;
+    } else if([self.calendarCollectionView.collectionViewLayout isKindOfClass:[CALAgendaLinearMonthCollectionViewLayout class]]) {
+        NSDate *firstDate = [self.fromDate firstDayOfTheMonth];
+        return [firstDate dateByAddingDays:indexPath.row];
     }
-    else {
-        NSDateComponents *components = [[NSDate gregorianCalendar] components:NSMonthCalendarUnit| NSCalendarUnitDay fromDate:firstDay];
-        [components setDay:indexPath.row - (weekDay - 1)];
-        [components setMonth:indexPath.section];
-        dateToReturn = [[NSDate gregorianCalendar] dateByAddingComponents:components toDate:self.fromFirstDayMonth options:0];
-    }
-    
-    //NSLog(@"Date at indexPath:%@ -> %@", indexPath,dateToReturn);
-    return dateToReturn;
+    return nil;
 }
 
 - (NSString *)monthAtIndexPath:(NSIndexPath *)indexPath

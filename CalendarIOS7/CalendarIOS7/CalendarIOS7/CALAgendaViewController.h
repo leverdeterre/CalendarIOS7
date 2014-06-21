@@ -20,6 +20,7 @@
 @property (weak, nonatomic) id <CALAgendaCollectionViewDelegate> agendaDelegate;
 @property (assign, nonatomic) CALDayCollectionViewCellDayUIStyle dayStyle;
 @property (assign, nonatomic) UICollectionViewScrollDirection calendarScrollDirection;
+@property (assign, nonatomic) Class collectionViewLayoutClass;
 
 - (void)reloadContent;
 

@@ -12,6 +12,7 @@
 static NSString *const kCALDateFormatterType_dd_MM_yyyy = @"dd/MM/yyyy";
 static NSString *const kCALDateFormatterType_HH_mm = @"HH:mm";
 static NSString *const kCALDateFormatterType_EEEE_d_MMMM_yyyy = @"EEEE d MMMM yyyy";
+static NSString *const kCALDateFormatterType_MMM = @"MMM";
 
 NSString * dateFormatterFormatFromType(CALDateFormatterType type);
 
@@ -26,6 +27,8 @@ NSString * dateFormatterFormatFromType(CALDateFormatterType type)
             
         case CALDateFormatterType_EEEE_d_MMMM_yyyy :
             return kCALDateFormatterType_EEEE_d_MMMM_yyyy;
+        case CALDateFormatterType_MMM:
+            return kCALDateFormatterType_MMM;
             
         default: // unknow type
             return nil;
