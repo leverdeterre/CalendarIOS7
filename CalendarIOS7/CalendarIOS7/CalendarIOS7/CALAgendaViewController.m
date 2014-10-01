@@ -43,6 +43,7 @@
 @property (strong, nonatomic) CALAgendaMonthCollectionViewLayout *collectionMonthLayout;
 //Quarts selection
 @property (strong, nonatomic) CALDay *dayStructured;
+@property (strong, nonatomic) NSDateFormatter *sectionFormater;
 
 @end
 
@@ -63,10 +64,12 @@
     } else {
         self.collectionMonthLayout = [CALAgendaMonthCollectionViewLayout new];
     }
+    
     self.collectionMonthLayout.scrollDirection = self.calendarScrollDirection;
-
     self.calendarCollectionView = [[CALAgendaCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:self.collectionMonthLayout];
     self.calendarCollectionView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth) ;
+    
+    self.sectionFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_dd_MM_yyyy];
 
     self.calendarCollectionView.delegate = self;
     [self.view addSubview:self.calendarCollectionView];
@@ -132,13 +135,12 @@
     self.eventsGroupByDay = [NSMutableDictionary new];
     for (id <CALgendaEvent> obj in self.events) {
         NSDate *startDate = [obj eventStartDate];
-        NSDateFormatter *sectionFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_dd_MM_yyyy];
-        NSMutableArray *events = [self.eventsGroupByDay objectForKey:[sectionFormater stringFromDate:startDate]];
+        NSMutableArray *events = [self.eventsGroupByDay objectForKey:[self.sectionFormater stringFromDate:startDate]];
         if (events == nil) {
             events = [NSMutableArray new];
         }
         [events addObject:obj];
-        [self.eventsGroupByDay setObject:events forKey:[sectionFormater stringFromDate:startDate]];
+        [self.eventsGroupByDay setObject:events forKey:[self.sectionFormater stringFromDate:startDate]];
     }
 }
 
@@ -283,8 +285,7 @@
 - (NSArray *)eventsAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDate *date = [self dateAtIndexPath:indexPath] ;
-    NSDateFormatter *sectionFormater = [NSDateFormatter dateFormatterForType:CALDateFormatterType_dd_MM_yyyy];
-    NSArray *events = [self.eventsGroupByDay objectForKey:[sectionFormater stringFromDate:date]];
+    NSArray *events = [self.eventsGroupByDay objectForKey:[self.sectionFormater stringFromDate:date]];
     return events;
 }
 
