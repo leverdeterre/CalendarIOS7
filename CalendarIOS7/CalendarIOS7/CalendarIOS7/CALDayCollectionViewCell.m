@@ -22,10 +22,6 @@
 
 //events
 @property (strong, nonatomic) CALayer *eventsLayer;
-
-//Month short
-@property (strong, nonatomic) UILabel *monthLabel;
-
 @end
 
 @implementation CALDayCollectionViewCell
@@ -33,8 +29,6 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    
-    _monthLabel.hidden = YES;
     [self removeEventsLayer];
 }
 
@@ -45,18 +39,10 @@
         // Initialization code
         _style = CALDayCollectionViewCellDayUIStyleNone;
         
-        CGRect monthRect = self.contentView.bounds;
-        monthRect.size.height = 15.0f;
-        _monthLabel = [[UILabel alloc] initWithFrame:monthRect];
-        _monthLabel.textAlignment = NSTextAlignmentCenter;
-        [_monthLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f]];
-        _monthLabel.backgroundColor = [UIColor clearColor];
-        _monthLabel.hidden = YES;
-        [self addSubview:_monthLabel];
-
-        _dayLabel = [[UILabel alloc] initWithFrame:self.bounds];
+        _dayLabel = [[UILabel alloc] initWithFrame:self.contentView.bounds];
 		_dayLabel.textAlignment = NSTextAlignmentCenter;
         [_dayLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f]];
+
         _dayLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_dayLabel];
 
@@ -65,6 +51,7 @@
 		_nbEventsLabel.font = [UIFont systemFontOfSize:12.0f];
         _nbEventsLabel.backgroundColor = [UIColor clearColor];
 		[self addSubview:_nbEventsLabel];
+        
     }
     return self;
 }
@@ -100,7 +87,7 @@
 
 - (void)updateCellWithDate:(NSDate *)date
 {
-    self.dayLabel.text = [NSString stringWithFormat:@"%d", [date dayComponents]];
+    self.dayLabel.text = [NSString stringWithFormat:@"%ld", (long)[date dayComponents]];
 }
 
 - (void)updateCellWithDate:(NSDate *)date andEvents:(NSInteger)nbEvents
@@ -198,14 +185,6 @@
 {
     [self.eventsLayer removeFromSuperlayer];
     self.eventsLayer = nil;
-}
-
-#pragma mark - Month
-
-- (void)activateMonthName:(NSString *)monthName
-{
-    self.monthLabel.hidden = NO;
-    self.monthLabel.text = monthName;
 }
 
 @end

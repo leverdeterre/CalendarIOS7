@@ -12,6 +12,6 @@
 
 @property (weak, nonatomic) UILabel *masterLabel;
 
-- (void)updateWithDayNames:(NSArray *)dayNames;
+- (void)updateWithDayNames:(NSArray *)dayNames cellSize:(CGSize)itemSize;
 
 @end

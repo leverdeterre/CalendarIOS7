@@ -12,8 +12,7 @@
 typedef NS_ENUM(NSInteger, CALDateFormatterType) {
     CALDateFormatterType_dd_MM_yyyy,
     CALDateFormatterType_HH_mm,
-    CALDateFormatterType_EEEE_d_MMMM_yyyy,
-    CALDateFormatterType_MMM
+    CALDateFormatterType_EEEE_d_MMMM_yyyy
 };
 
 @interface NSDateFormatter (CAT)

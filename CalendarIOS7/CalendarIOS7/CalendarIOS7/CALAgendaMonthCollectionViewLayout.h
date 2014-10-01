@@ -10,6 +10,7 @@
 
 @interface CALAgendaMonthCollectionViewLayout : CALCollectionViewFlowLayoutWithStickyHeader
 
-//@property (nonatomic, strong) NSArray *items;
+- (id)initWithWidth:(CGFloat)width;
+- (id)initWithWidth:(CGFloat)width itemSize:(CGSize)itemSize;
 
 @end

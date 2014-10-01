@@ -14,7 +14,7 @@
 #import "CALAgenda.h"
 #import "JMOEvent.h"
 
-@interface CALViewController () <UICollectionViewDelegate, CALAgendaCollectionViewDelegate>
+@interface CALViewController () <UICollectionViewDelegate, CALAgendaCollectionViewDelegate, CALAgendaCollectionViewDatasource>
 @property (nonatomic, strong) CALAgendaViewController *agendaVc;
 @property (nonatomic, strong) JMOEvent *event;
 @end
@@ -69,7 +69,6 @@
 - (IBAction)showMyCalendarStyleCustom:(id)sender
 {
     self.agendaVc = [CALAgendaViewController new];
-    self.agendaVc.collectionViewLayoutClass = CALAgendaLinearMonthCollectionViewLayout.class;
     self.agendaVc.agendaDelegate = self;
     NSDateComponents *components = [NSDateComponents new];
     components.month = 4;
@@ -88,6 +87,7 @@
 }
 
 #pragma mark - helpers
+
 - (NSArray *)fakeEvents
 {
     NSDate *now = [[NSDate gregorianCalendar] dateFromComponents:[[NSDate gregorianCalendar]  components:NSYearCalendarUnit|NSMonthCalendarUnit fromDate:[NSDate date]]];

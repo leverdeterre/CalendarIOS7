@@ -18,6 +18,42 @@ static NSString * const CALAgendaMonthCollectionViewLayoutHeader = @"CALAgendaMo
 
 @implementation CALAgendaMonthCollectionViewLayout
 
+- (id)initWithWidth:(CGFloat)width
+{
+    self = [self init];
+    if (self) {
+        self.headerReferenceSize = CGSizeMake(width, 64.0f);
+		
+		CGFloat minSpacingWidth = 1.;
+		CGFloat maxWidth = floor((width - minSpacingWidth * 6) / 7.);
+		self.itemSize = CGSizeMake(maxWidth, maxWidth);        
+        self.minimumLineSpacing = (width - (maxWidth * 7.)) / 6.;
+        self.minimumInteritemSpacing = self.minimumLineSpacing;
+    }
+    return self;
+}
+
+- (id)initWithWidth:(CGFloat)width itemSize:(CGSize)itemSize
+{
+    self = [self init];
+    if (self) {
+        self.headerReferenceSize = CGSizeMake(width, 64.0f);
+        
+        //7 cells by lines
+        self.itemSize =itemSize;
+        CGFloat widthForSpace = width - 7 * self.itemSize.width;
+        if (widthForSpace < 0) {
+            NSAssert(widthForSpace, @"WARNING, widthForSpace < 0");
+            widthForSpace = 0.0f;
+        }
+        
+        self.minimumLineSpacing = widthForSpace / 6.0f;
+        self.minimumInteritemSpacing = widthForSpace / 6.0f;;
+    }
+    return self;
+}
+
+
 - (instancetype)init
 {
     self = [super init];
@@ -62,7 +98,7 @@ static NSString * const CALAgendaMonthCollectionViewLayoutHeader = @"CALAgendaMo
             [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             itemAttributes.frame = [self frameForItemAtIndexPath:indexPath previousRect:previousRect previousIndexPath:previousIndexPath];
             previousRect = itemAttributes.frame;
-            JMOLog(@"indexPath(%@) -> %@",indexPath, NSStringFromCGRect(previousRect));
+            //JMOLog(@"indexPath(%@) -> %@",indexPath, NSStringFromCGRect(previousRect));
             cellLayoutInfo[indexPath] = itemAttributes;
             previousIndexPath = indexPath;
         }
@@ -107,8 +143,8 @@ static NSString * const CALAgendaMonthCollectionViewLayoutHeader = @"CALAgendaMo
     else {
         //compute the worst case
         NSInteger numOfSections = [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView];
-        CGSize contentSize = CGSizeMake(7*self.headerReferenceSize.width*numOfSections,self.headerReferenceSize.height + 6*self.itemSize.height);
-        JMOLog(@"COntent size -> %@", NSStringFromCGSize(contentSize));
+        CGSize contentSize = CGSizeMake(7*self.headerReferenceSize.width*numOfSections, self.headerReferenceSize.height + 6*self.itemSize.height + 7*self.minimumLineSpacing);
+        //JMOLog(@"COntent size -> %@", NSStringFromCGSize(contentSize));
         return contentSize;
     }
 }

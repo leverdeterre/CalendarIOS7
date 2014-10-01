@@ -28,6 +28,5 @@ typedef NS_ENUM(NSInteger,  CALDayCollectionViewCellDayUIStyle) {
 
 - (void)updateCellWithDate:(NSDate *)date;
 - (void)updateCellWithDate:(NSDate *)date andEvents:(NSInteger)nbEvents;
-- (void)activateMonthName:(NSString *)monthName;
 
 @end

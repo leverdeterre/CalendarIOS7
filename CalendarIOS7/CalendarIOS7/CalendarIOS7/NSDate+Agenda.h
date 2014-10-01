@@ -22,7 +22,6 @@
 + (NSLocale *)locale;
 
 + (NSInteger)numberOfMonthFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
-+ (NSInteger)numberOfDaysFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate;
 + (NSInteger)numberOfDaysInMonthForDate:(NSDate *)fromDate;
 
 - (BOOL)isToday;

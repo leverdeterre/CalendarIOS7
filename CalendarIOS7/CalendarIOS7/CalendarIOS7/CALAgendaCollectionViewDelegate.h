@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class CALAgendaCollectionView;
+
+@protocol CALAgendaCollectionViewDatasource <NSObject>
+@optional
+- (CGSize)estimatedAgendaCollectionViewItemSize;
+@end
+
 @protocol CALAgendaCollectionViewDelegate <NSObject>
 
 - (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath selectedDate:(NSDate *)selectedDate;

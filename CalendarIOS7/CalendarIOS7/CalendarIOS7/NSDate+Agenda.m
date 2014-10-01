@@ -78,21 +78,6 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
     return [gregorian components:NSMonthCalendarUnit fromDate:fromDate toDate:toDate options:0].month+1;
 }
 
-+ (NSInteger)numberOfDaysFromDate:(NSDate *)fromDate toDate:(NSDate *)toDate
-{
-    NSCalendar *gregorian = [self gregorianCalendar];
-    
-    [gregorian rangeOfUnit:NSDayCalendarUnit startDate:&fromDate
-                 interval:NULL forDate:fromDate];
-    [gregorian rangeOfUnit:NSDayCalendarUnit startDate:&toDate
-                 interval:NULL forDate:toDate];
-    
-    NSDateComponents *difference = [gregorian components:NSDayCalendarUnit
-                                               fromDate:fromDate toDate:toDate options:0];
-    
-    return [difference day];
-}
-
 + (NSInteger)numberOfDaysInMonthForDate:(NSDate *)fromDate
 {
     NSCalendar *gregorian = [self gregorianCalendar];
@@ -140,8 +125,8 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 - (NSInteger)monthComponents
 {
     NSCalendar *calendar = [self.class gregorianCalendar];
-    NSDateComponents *comps = [calendar components: NSMonthCalendarUnit fromDate:self];
-    return comps.month;
+    NSDateComponents *comps = [calendar components: NSDayCalendarUnit fromDate:self];
+    return comps.day;
 }
 
 - (NSDate *)startingDate
