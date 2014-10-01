@@ -56,7 +56,7 @@
 
 - (NSInteger)lastSelectedQuart
 {
-    for (int i =  self.quarts.count-1; i >= 0 ; i--) {
+    for (int i =  (int)self.quarts.count-1; i >= 0 ; i--) {
         CALQuartHour *quart = self.quarts[i];
         if ([quart isSelected]) {
             return i;
@@ -67,10 +67,10 @@
 
 - (void)selectQuartsFrom:(NSInteger)from to:(NSInteger)to
 {
-    JMOLog(@"select from %d to %d", from, to);
+    JMOLog(@"select from %ld to %ld", (long)from, (long)to);
     [self resetQuartsStates];
     CALQuartHourViewRdvState state = CALQuartHourViewRdvStateDebut;
-    for (int i = from; i <= to; i++) {
+    for (int i = (int)from; i <= to; i++) {
         if (i == to && i == from) {
             state = CALQuartHourViewRdvStateFin | CALQuartHourViewRdvStateDebut;
         }

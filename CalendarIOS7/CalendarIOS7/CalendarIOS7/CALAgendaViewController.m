@@ -423,7 +423,7 @@
 - (NSArray *)indexPathsFrom:(NSInteger)from to:(NSInteger)to
 {
     NSMutableArray *indexPaths = [NSMutableArray new];
-    for (int i = from; i <= to; i++) {
+    for (int i = (int)from; i <= to; i++) {
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
     }
     return indexPaths;

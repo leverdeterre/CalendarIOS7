@@ -115,7 +115,7 @@
     else {
         self.hourView.hidden = NO;
         self.hourLabel.hidden = NO;
-        self.hourLabel.text = [NSString stringWithFormat:@"%dh", hour];
+        self.hourLabel.text = [NSString stringWithFormat:@"%ldh", (long)hour];
     }
 }
 

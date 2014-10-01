@@ -89,7 +89,7 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 {
     NSCalendar *gregorian = [self.class gregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self];
-    int weekday = [comps weekday];
+    NSInteger weekday = [comps weekday];
     return weekday ;
 }
 
