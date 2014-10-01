@@ -13,14 +13,20 @@ Day cells styles
 
 ## Changes
 ---------------------------------------------------
+
+v 0.0.4 
+* Support iphone 5, 6, 6Plus layout
+* Fixed Xcode 64bits warnings
+
 v 0.0.3 
-	fix section number (number of months between two dates)
-	update app localization	
+* Fixed section number (number of months between two dates)
+* update app localization	
+
 v 0.0.2 
-	Implementation of horizontal scrollDirection
+* Implementation of horizontal scrollDirection
 	
 v 0.0.1 
-	Draft version
+* Draft version
 
 Supported iOS & SDK Versions
 ---------------------------------------------------
@@ -44,12 +50,24 @@ Creating a CalendarViewController
     [agendaVc setFromDate:fromDate];
     [agendaVc setToDate:toDate];
     #Select cell style
-	agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleIOS7;
+    agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleIOS7;
+```
+
+Or subclassing CALAgendaViewController (don't forget your CollectionView outlet CALAgendaCollectionView)
+---------------------------------------------------
+
+```objc
+    CALAgendaViewController *agendaVc = [CALAgendaViewController new];
+    agendaVc.calendarScrollDirection = UICollectionViewScrollDirectionHorizontal;
+    agendaVc.agendaDelegate = self;
+    [agendaVc setFromDate:fromDate];
+    [agendaVc setToDate:toDate];
+    #Select cell style
+    agendaVc.dayStyle = CALDayCollectionViewCellDayUIStyleIOS7;
 ```
 
 Delegation : CALAgendaCollectionViewDelegate
 ---------------------------------------------------
-
 
 ```objc
 - (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath selectedDate:(NSDate *)selectedDate;
@@ -59,7 +77,6 @@ Delegation : CALAgendaCollectionViewDelegate
 ```objc
 - (BOOL)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView canSelectDate:(NSDate *)selectedDate;
 ```
-
 
 ```objc
 - (void)agendaCollectionView:(CALAgendaCollectionView *)agendaCollectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath startDate:(NSDate *)startDate endDate:(NSDate*)endDate;
