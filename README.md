@@ -14,9 +14,10 @@ Day cells styles
 ## Changes
 ---------------------------------------------------
 
-v 0.0.4 
+v 0.0.5 
 * Support iphone 5, 6, 6Plus layout
-* Fixed Xcode 64bits warnings
+* Fixed Xcode 6
+* Fixed 64bits warnings
 
 v 0.0.3 
 * Fixed section number (number of months between two dates)
