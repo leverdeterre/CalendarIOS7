@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CalendarIOS7"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "Calendar component for iOS apps."
   s.requires_arc = true
 
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.source = {
         :git => 'https://github.com/leverdeterre/CalendarStyle.git',
-        :tag => '0.0.4'
+        :tag => '0.0.5'
  }
   s.source_files  = 'Classes', 'CalendarIOS7/CalendarIOS7/CalendarIOS7/*.{h,m}'
   s.public_header_files = 'CalendarIOS7/CalendarIOS7/CalendarIOS7/*.h'
