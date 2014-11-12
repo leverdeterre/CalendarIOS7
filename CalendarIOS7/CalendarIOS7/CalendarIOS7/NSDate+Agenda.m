@@ -126,7 +126,7 @@ const char * const JmoLocaleStoreKey = "jmo.locale";
 {
     NSCalendar *calendar = [self.class gregorianCalendar];
     NSDateComponents *comps = [calendar components: NSMonthCalendarUnit fromDate:self];
-    return comps.day;
+    return comps.month;
 }
 
 - (NSDate *)startingDate

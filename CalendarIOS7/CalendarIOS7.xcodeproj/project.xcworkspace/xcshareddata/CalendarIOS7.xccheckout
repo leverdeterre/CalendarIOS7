@@ -11,35 +11,23 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>90DBE7B9464F65CE56F0F72EF9595FADBE306C50</key>
-		<string>https://github.com/leverdeterre/CalendarIOS7.git</string>
-		<key>AF35A7A83FF9099F4AF74D1E16D71D18D0829CE0</key>
-		<string>https://github.com/leverdeterre/JMAnimatedImageView.git</string>
+		<string>https://github.com/arunaharsa/CalendarIOS7.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CalendarIOS7/CalendarIOS7.xcodeproj/project.xcworkspace</string>
+	<string>CalendarIOS7/CalendarIOS7.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>90DBE7B9464F65CE56F0F72EF9595FADBE306C50</key>
 		<string>../../..</string>
-		<key>AF35A7A83FF9099F4AF74D1E16D71D18D0829CE0</key>
-		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/leverdeterre/CalendarIOS7.git</string>
+	<string>https://github.com/arunaharsa/CalendarIOS7.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
 	<string>90DBE7B9464F65CE56F0F72EF9595FADBE306C50</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>AF35A7A83FF9099F4AF74D1E16D71D18D0829CE0</string>
-			<key>IDESourceControlWCCName</key>
-			<string></string>
-		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
