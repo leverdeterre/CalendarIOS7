@@ -1,6 +1,6 @@
-## My other librairies
+## My other works
 
-[Have a look to my other librairies] (http://leverdeterre.github.io)
+[http://leverdeterre.github.io] (http://leverdeterre.github.io)
 
 Calendar iOS
 ==================
